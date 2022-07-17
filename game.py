@@ -27,16 +27,16 @@ URANUS_DIST  = 2872500000
 NEPTUNE_DIST = 4495100000
 PLUTO_DIST   = 5884500000
 # Radius of planets (km)
-SUN_RADIUS     = 432690
-MERCURY_RADIUS = 2439.5
-VENUS_RADIUS   = 6054
-EARTH_RADIUS   = 6378
-MARS_RADIUS    = 3396
-JUPITER_RADIUS = 71492
-SATURN_RADIUS  = 60268
-URANUS_RADIUS  = 25559
-NEPTUNE_RADIUS = 24764
-PLUTO_RADIUS   = 7444 #this is not real
+SUN_RADIUS = 696340
+MERCURY_RADIUS = 2439.7
+VENUS_RADIUS = 6051.8
+EARTH_RADIUS = 6371
+MARS_RADIUS = 3389.5
+JUPITER_RADIUS = 69911
+SATURN_RADIUS = 58232
+URANUS_RADIUS = 25362
+NEPTUNE_RADIUS = 24622
+PLUTO_RADIUS = 1188.3
 
 SCALE_PLANET = 0.007
 SCALE_SYSTEM = 0.000001
@@ -62,7 +62,7 @@ MERCURY_D = SUN_SIZE / SUN_MERCURY_RATIO
 
 SCREEN_TITLE = "Solar System 1.4"
 SHIP_TURN_AMOUNT = 3
-SHIP_SPEED = 3
+SHIP_SPEED = 5
 
 class Point:
     """
@@ -103,8 +103,8 @@ class Ship:
         self.height = self.texture.height*0.10
         self.ship_dist = EARTH_DIST # -> distance between Sun and ship
         self.center = Point() # -> coordinates of the center
-        self.center.x = 350 # -> x-coordinate changed
-        self.center.y = 250 # -> y-coordinate changed
+        self.center.x = 1100 # -> x-coordinate changed
+        self.center.y = 350 # -> y-coordinate changed
         self.velocity = Velocity() # -> values for changing coordinates
         self.angle = 0
     
@@ -189,16 +189,16 @@ class Game(arcade.Window):
         self.ship = Ship()
         
         self.planets = [ # -> planets created
-            Planet("Sun", 0,-500, SUN_SIZE),
-            Planet("Mercury", MERCURY_DIST, 150, MERCURY_SIZE),
-            Planet("Venus", VENUS_DIST, 250, VENUS_SIZE),
-            Planet("Earth", EARTH_DIST, 350, EARTH_SIZE),
-            Planet("Mars", MARS_DIST, 450,MARS_SIZE),
-            Planet("Jupiter", JUPITER_DIST, 660, JUPITER_SIZE),
-            Planet("Saturn", SATURN_DIST, 950, SATURN_SIZE),
-            Planet("Uranus", URANUS_DIST, 1100, URANUS_SIZE),
-            Planet("Neptune", NEPTUNE_DIST, 1200, NEPTUNE_SIZE),
-            Planet("Pluto", PLUTO_DIST, 1400, PLUTO_SIZE)
+            Planet("Sun", 0, 0.0, SUN_SIZE),
+            Planet("Mercury", MERCURY_DIST, 900, MERCURY_SIZE),
+            Planet("Venus", VENUS_DIST, 1000, VENUS_SIZE),
+            Planet("Earth", EARTH_DIST, 1100, EARTH_SIZE),
+            Planet("Mars", MARS_DIST, 1250, MARS_SIZE),
+            Planet("Jupiter", JUPITER_DIST, 1800, JUPITER_SIZE),
+            Planet("Saturn", SATURN_DIST, 2300, SATURN_SIZE),
+            Planet("Uranus", URANUS_DIST, 2700, URANUS_SIZE),
+            Planet("Neptune", NEPTUNE_DIST, 3000, NEPTUNE_SIZE),
+            Planet("Pluto", PLUTO_DIST, 3400, PLUTO_SIZE)
         ]
 
         # Used in scrolling
@@ -283,12 +283,12 @@ class Game(arcade.Window):
         arcade.draw_rectangle_filled(self.box_center_x, self.box_center_y, self.box_width, self.box_height, arcade.color.ALMOND)
         
         # Draw text for info box
-        text_1 = f"Last Planet: {self.place}"
-        arcade.draw_text(text_1, self.box_center_x*0.05,screen_height-self.box_height*0.25, arcade.color.BLACK_BEAN, 15)
-        text_2 = f"Distance from center: {self.distance_from_earth} [Km]"
-        arcade.draw_text(text_2, self.box_center_x*0.05,screen_height-self.box_height*0.50, arcade.color.BLACK_BEAN, 15)
-        text_3 = f"Radius: {self.radius} [Km]"
-        arcade.draw_text(text_3, self.box_center_x*0.05,screen_height-self.box_height*0.75, arcade.color.BLACK_BEAN, 15)     
+        text = f"Current Planet: {self.place}"
+        arcade.draw_text(text, self.box_center_x*0.05,screen_height-self.box_height*0.2, arcade.color.BLACK_BEAN, 15)
+        text = f"Distance from the Sun: {self.distance_from_earth}km"
+        arcade.draw_text(text, self.box_center_x*0.05,screen_height-self.box_height*0.4, arcade.color.BLACK_BEAN, 15)
+        text = f"Planet Radius: {self.radius}km"
+        arcade.draw_text(text, self.box_center_x*0.05,screen_height-self.box_height*0.6, arcade.color.BLACK_BEAN, 15)    
 
     
     def check_collision(self):
@@ -317,7 +317,7 @@ class Game(arcade.Window):
                 if self.place == "Mars":   
                     self.distance_from_earth = MARS_DIST
                     self.radius = MARS_RADIUS
-                if self.place == "Jutiper":   
+                if self.place == "Jupiter":   
                     self.distance_from_earth = JUPITER_DIST
                     self.radius = JUPITER_RADIUS
                 if self.place == "Saturn":   
