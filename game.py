@@ -302,9 +302,6 @@ class Game(arcade.Window):
             if (abs(planet.center.x - self.ship.center.x) < too_close and abs(planet.center.y - self.ship.center.y) < too_close):
                 self.place = planet.name
 
-                with open("travel_log.txt", "a") as travel_log:
-                    travel_log.write(f"User travelled to {planet.name} which is {planet.p_dist} miles away from the sun.\n")
-
                 if self.place == "Sun":
                     self.distance_from_earth = 0
                     self.radius = SUN_RADIUS
@@ -374,7 +371,6 @@ class Game(arcade.Window):
             # so there is a one-to-one mapping.
             width, height = self.get_size()
             self.set_viewport(0, width, 0, height)
-
       
     def on_key_release(self, key: int, modifiers: int):
         """
